@@ -2,10 +2,9 @@ import { Button, Card, CardActions, CardContent, CardHeader, Grid, TextField } f
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
-import { createUserWithEmailAndPassword, sendEmailVerification, updateCurrentUser } from "firebase/auth";
-import { auth, Firebase } from "../../config/firebase";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import { useState } from "react";
-import userEvent from "@testing-library/user-event";
 
 
 interface Props { }

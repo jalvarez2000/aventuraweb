@@ -13,7 +13,7 @@ const AuthGoogleContainer = (props: Props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [disabled, setDisabled] = useState(false);
 
-  const signInWithGoogle = () => {
+  function signInWithGoogle() {
     setDisabled(true);
     signInWithPopup(auth, Providers.google)
       .then(() => {

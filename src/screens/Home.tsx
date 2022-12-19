@@ -4,7 +4,7 @@ import Center from "../components/utils/Center";
 
 interface Props {}
 
-const Home = ({}: Props) => {
+const Home = (props: Props) => {
   useEffect(() => {}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

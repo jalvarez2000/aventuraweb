@@ -67,6 +67,7 @@ const AuthLoginContainer = (props: Props) => {
               margin="normal"
               {...register("username")}
             />
+            <p>{errors.username?.message}</p>
             <TextField
               fullWidth
               id="password"
@@ -75,7 +76,8 @@ const AuthLoginContainer = (props: Props) => {
               placeholder="Password"
               margin="normal"
               {...register("password")}
-            />
+            />  
+            <p>{errors.password?.message}</p>
           </div>
         </CardContent>
         <CardActions>

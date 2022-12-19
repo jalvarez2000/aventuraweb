@@ -11,7 +11,7 @@ interface Props {
 const Logout = ({ navigateTo = "/login" }: Props) => {
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
-  const logout = () => {
+  function logout() {
     setDisabled(true);
     signOut(auth)
       .then(() => {
