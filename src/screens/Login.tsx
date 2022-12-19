@@ -2,7 +2,6 @@ import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import AuthContainers from "../components/auth/AuthContainers";
-import AuthLoginContainer from "../components/auth/AuthLoginContainer";
 import RegisterContainer from "../components/auth/RegisterContainer";
 import Center from "../components/utils/Center";
 

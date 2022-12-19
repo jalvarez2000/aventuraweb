@@ -28,6 +28,7 @@ const AuthGoogleContainer = (props: Props) => {
   };
 
   return (
+    <div>
       <Button
         startIcon={<GoogleIcon />}
         size="large"
@@ -37,6 +38,8 @@ const AuthGoogleContainer = (props: Props) => {
       >
         Sign In With Google
       </Button>
+      <p>{errorMessage}</p>
+    </div>
   );
 };
 
