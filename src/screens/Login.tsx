@@ -1,17 +1,19 @@
 import { Box, Tab, Tabs } from "@mui/material";
 import React from "react";
 import { useSearchParams } from "react-router-dom";
-import AuthContainer from "../components/auth/AuthContainer";
+import AuthContainers from "../components/auth/AuthContainers";
+import AuthLoginContainer from "../components/auth/AuthLoginContainer";
+import RegisterContainer from "../components/auth/RegisterContainer";
 import Center from "../components/utils/Center";
 
-interface Props {}
+interface Props { }
 
 const tabIdToURL: { [id: number]: string } = {
   0: "login",
   1: "register",
 };
 
-const Login = ({}: Props) => {
+const Login = ({ }: Props) => {
   // getting and setting URL params
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -50,11 +52,11 @@ const Login = ({}: Props) => {
         </Box>
         {/* login */}
         <TabPanel value={value} index={0}>
-          <AuthContainer />
+          <AuthContainers />
         </TabPanel>
         {/* register */}
         <TabPanel value={value} index={1}>
-          <AuthContainer />
+          <RegisterContainer/>
         </TabPanel>
       </Box>
     </Center>
