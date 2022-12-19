@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FirebaseApiKey,
-  authDomain: process.env.REACT_APP_FirebaseAuthDomain,
-  projectId: process.env.REACT_APP_FirebaseProjectId,
-  storageBucket: process.env.REACT_APP_FirebaseStorageBucket,
-  messagingSenderId: process.env.REACT_APP_FirebaseMessagingSenderId,
-  appId: process.env.REACT_APP_FirebaseAppId,
+  apiKey: "AIzaSyA9R8sRDJePtjOwcF2x8GyBUqVkWhwGvoo",
+  authDomain: "aventura-db.firebaseapp.com",
+  projectId: "aventura-db",
+  storageBucket: "aventura-db.appspot.com",
+  messagingSenderId: "668153216750",
+  appId: "1:668153216750:web:f9d787d2bc2af8a36b7dff"
 };

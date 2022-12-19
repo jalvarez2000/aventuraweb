@@ -24,3 +24,16 @@ yarn-error.log*
 
 .env
 dev.md
+.gradle/6.4/fileChanges/last-build.bin
+
+.gradle/6.4/fileHashes/fileHashes.lock
+
+.gradle/6.4/gc.properties
+
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+
+.gradle/buildOutputCleanup/cache.properties
+
+.gradle/checksums/checksums.lock
+
+.gradle/vcs-1/gc.properties
