@@ -1,5 +1,4 @@
-import { Box, Grid } from "@mui/material";
-import Center from "../utils/Center";
+import { Box } from "@mui/material";
 import AuthGoogleContainer from "./AuthGoogleContainer";
 import AuthLoginContainer from "./AuthLoginContainer";
 

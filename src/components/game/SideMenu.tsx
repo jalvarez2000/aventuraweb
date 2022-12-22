@@ -46,7 +46,7 @@ const SideMenu = (props: Props) => {
             {value && (
                 <List>
                     {value.docs.map((doc) => (
-                        <ListItemButton>
+                        <ListItemButton key={doc.id}>
                             <ListItemText primary={doc.data().description} />
                         </ListItemButton>
                     ))}

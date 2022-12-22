@@ -31,9 +31,9 @@ function App() {
     <div>
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
-          {routes.map((route, index) => (
+          {routes.map((route, indexKey) => (
             <Route
-              key={index}
+              key={indexKey}
               path={route.path}
               element={
                 route.protected ? (
