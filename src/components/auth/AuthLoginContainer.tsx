@@ -3,19 +3,21 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import {
+  Alert,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
   Grid,
+  Snackbar,
   TextField,
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-interface Props {}
+interface Props { }
 
 const AuthLoginContainer = (props: Props) => {
   type FormValues = {
@@ -24,8 +26,8 @@ const AuthLoginContainer = (props: Props) => {
   };
 
   const validationSchema = yup.object({
-    username: yup.string().required("Username is required"),
-    password: yup.string().required("Password is required"),
+    username: yup.string().required("Username is required").email("Invalid email format"),
+    password: yup.string().required("Password is required").min(6, "Password must be at least 6 characters long")
   });
 
   const {
@@ -33,7 +35,9 @@ const AuthLoginContainer = (props: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>({ resolver: yupResolver(validationSchema) });
+
   const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -49,13 +53,17 @@ const AuthLoginContainer = (props: Props) => {
       })
       .catch((error) => {
         setErrorMessage(error.code + ": " + error.message);
+        setOpen(true);
       });
   };
 
+  function handleClose() {
+    setOpen(false);
+  }
+
   return (
-    <form noValidate autoComplete="off" onSubmit={handleSubmit(loginUser)}>
+    <form autoComplete="off" onSubmit={handleSubmit(loginUser)}>
       <Card>
-        <CardHeader title="Login" />
         <CardContent>
           <div>
             <TextField
@@ -65,9 +73,10 @@ const AuthLoginContainer = (props: Props) => {
               label="Username"
               placeholder="Username"
               margin="normal"
+              error={errors.username ? true : false}
+              helperText={errors.username?.message}
               {...register("username")}
             />
-            <p>{errors.username?.message}</p>
             <TextField
               fullWidth
               id="password"
@@ -75,9 +84,10 @@ const AuthLoginContainer = (props: Props) => {
               label="Password"
               placeholder="Password"
               margin="normal"
+              error={errors.password ? true : false}
+              helperText={errors.password?.message}
               {...register("password")}
-            />  
-            <p>{errors.password?.message}</p>
+            />
           </div>
         </CardContent>
         <CardActions>
@@ -90,8 +100,19 @@ const AuthLoginContainer = (props: Props) => {
             </Grid>
           </Grid>
         </CardActions>
-        <p>{errorMessage}</p>
       </Card>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+        open={open}
+        autoHideDuration={4000}
+        onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
+        </Alert>
+      </Snackbar>
     </form>
   );
 };

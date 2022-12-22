@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import GoogleIcon from "@mui/icons-material/Google";
 
 
-interface Props {}
+interface Props { }
 
 const AuthGoogleContainer = (props: Props) => {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const AuthGoogleContainer = (props: Props) => {
   };
 
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <Button
         startIcon={<GoogleIcon />}
         size="large"
