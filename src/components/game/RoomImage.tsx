@@ -1,11 +1,11 @@
 
 import { CardMedia } from '@mui/material';
 
-interface roomDescriptionProperties {
+interface RoomImageProperties {
     imageUrl: string;
 }
 
-const RoomImage = (props: roomDescriptionProperties) => {
+const RoomImage = (props: RoomImageProperties) => {
     return (
         <CardMedia
             component="img"

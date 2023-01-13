@@ -3,13 +3,12 @@ import { Grid } from '@mui/material';
 import { useGetRoomInfo } from '../../services/room';
 import RoomDescription from './RoomDescription';
 import RoomImage from './RoomImage';
-import { useDownloadURL } from 'react-firebase-hooks/storage';
 
-interface roomProperties {
+interface RoomProperties {
     roomId: string;
 }
 
-const RoomArea = (properties: roomProperties) => {
+const RoomArea = (properties: RoomProperties) => {
     const [value, descriptionLoading, descriptionError] = useGetRoomInfo(properties.roomId);
 
     return (

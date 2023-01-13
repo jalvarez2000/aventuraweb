@@ -1,11 +1,11 @@
 
 import { Typography } from '@mui/material';
 
-interface roomDescriptionProperties {
+interface RoomDescriptionProperties {
     description: string;
 }
 
-const RoomDescription = (props: roomDescriptionProperties) => {
+const RoomDescription = (props: RoomDescriptionProperties) => {
     return (
         <Typography sx={{
             marginTop: "1rem",
