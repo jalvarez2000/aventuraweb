@@ -1,23 +1,14 @@
-import { Logout } from "@mui/icons-material";
-import { Box, Button, Divider, Drawer, List, ListItemButton, ListItemText } from "@mui/material";
-import { collection } from "firebase/firestore";
+import { Box, Divider, Drawer, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
-import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../config/firebase";
-import { Game } from "../../models/Game";
+import LogoutAdventure from "../auth/LogoutAdventure";
+import AddCircleTwoToneIcon from '@mui/icons-material/AddCircle';
+import { useGetGames } from "../../services/game";
 
-interface Props {
-    games: Array<Game>;
-}
-const SideMenu = (props: Props) => {
+
+const SideMenu = () => {
     const [isOpened, setIsOpened] = useState(false);
 
-    const [value, loading, error] = useCollection(
-        collection(db, 'games'),
-        {
-            snapshotListenOptions: { includeMetadataChanges: true },
-        }
-    );
+    const [games, loading, error] = useGetGames();
 
 
     const toggleDrawer =
@@ -43,15 +34,17 @@ const SideMenu = (props: Props) => {
         >
             {error && <strong>Error: {JSON.stringify(error)}</strong>}
             {loading && <span>Document: Loading...</span>}
-            {value && (
+            {games && (
                 <List>
-                    {value.docs.map((doc) => (
+                    <ListItemButton style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                        <LogoutAdventure />
+                    </ListItemButton>
+                    <Divider />
+                    {games.docs.map((doc) => (
                         <ListItemButton key={doc.id}>
                             <ListItemText primary={doc.data().description} />
                         </ListItemButton>
                     ))}
-                    <Divider />
-                    <Logout />
                 </List>
             )}
         </Box>
@@ -60,7 +53,7 @@ const SideMenu = (props: Props) => {
     return (
         <div>
             <React.Fragment>
-                <Button onClick={toggleDrawer(true)}>Change adventure</Button>
+                <AddCircleTwoToneIcon fontSize="large" onClick={toggleDrawer(true)} />
                 <Drawer
                     anchor='left'
                     open={isOpened}

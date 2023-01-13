@@ -3,12 +3,13 @@ import { Button } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
+import { Logout } from "@mui/icons-material";
 
 interface Props {
   navigateTo?: string;
 }
 
-const Logout = ({ navigateTo = "/login" }: Props) => {
+const LogoutAdventure = ({ navigateTo = "/login" }: Props) => {
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
   function logout() {
@@ -24,12 +25,12 @@ const Logout = ({ navigateTo = "/login" }: Props) => {
   };
 
   return (
-    <div>
+    <React.Fragment>
       <Button disabled={disabled} onClick={logout}>
-        Logout
+        Sign Out <Logout />
       </Button>
-    </div>
+    </React.Fragment>
   );
 };
 
-export default Logout;
+export default LogoutAdventure;
