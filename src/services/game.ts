@@ -11,7 +11,7 @@ const useGetGames = () => {
     )
 };
 
-const useGetGameInfo = (gameId) => {
+const useGetGameInfo = (gameId: string) => {
     return useDocument(
         doc(db, `games/${gameId}`),
         {

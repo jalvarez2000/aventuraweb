@@ -1,16 +1,21 @@
-import React from "react";
 import RoomArea from "../components/game/RoomArea";
 import SideMenu from "../components/game/SideMenu";
+import { useGetCurrentPlayerRoom } from "../services/player";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import React, { useEffect, useState } from "react";
+import { auth } from "../config/firebase";
+import { useGetRoomInfo } from "../services/room";
 
-interface Props { }
 
-const Home = (props: Props) => {
+const Home = () => {
+  const gameId = "6VgFHH0eftew5fVtqPQx";
+  const [user, loading, error] = useAuthState(auth);
+  const [roomId, loadingRoom, errorRoom] = useGetCurrentPlayerRoom(gameId, user?.uid);
 
-  //TODO Leer RoomId del player asociado al juego y refrescar en tiempo real
   return (
     <React.Fragment>
       <SideMenu />
-      <RoomArea roomId="xGWThPYRsF4IVoT8mtIs" />
+      {roomId && <RoomArea roomId={roomId.data()?.roomId} />}
     </React.Fragment>
   );
 }

@@ -2,18 +2,15 @@ import { useDocument } from "react-firebase-hooks/firestore";
 import { db } from "../config/firebase";
 import { doc } from "firebase/firestore";
 
-
-const useGetRoomInfo = (roomId) => {
+const useGetCurrentPlayerRoom = (gameId: string, playerId: string | undefined) => {
     return useDocument(
-        doc(db, "games/6VgFHH0eftew5fVtqPQx/rooms", roomId),
+        doc(db, `games/${gameId}/players/${playerId}`),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
     )
 };
 
-
-
 export {
-    useGetRoomInfo
+    useGetCurrentPlayerRoom
 }

@@ -47,7 +47,6 @@ const AuthLoginContainer = (props: Props) => {
       data.password
     )
       .then(() => {
-        console.info("TODO: navigate to authenticated screen");
         navigate("/");
       })
       .catch((error) => {

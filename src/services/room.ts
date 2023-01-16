@@ -3,9 +3,9 @@ import { db } from "../config/firebase";
 import { doc } from "firebase/firestore";
 
 
-const useGetPlayerInfo = (gameId, playerId) => {
+const useGetRoomInfo = (roomId: string) => {
     return useDocument(
-        doc(db, `games/${gameId}/players`, playerId),
+        doc(db, "games/6VgFHH0eftew5fVtqPQx/rooms", roomId),
         {
             snapshotListenOptions: { includeMetadataChanges: true },
         }
@@ -15,5 +15,5 @@ const useGetPlayerInfo = (gameId, playerId) => {
 
 
 export {
-    useGetPlayerInfo
+    useGetRoomInfo
 }
