@@ -1,10 +1,10 @@
-import { Alert, Box, Button, Card, CardActions, CardContent, Grid, Snackbar, TextField } from "@mui/material";
+import { Alert, Box, Button, Card, CardActions, CardContent, FormControl, FormGroup, FormHelperText, Grid, Input, Snackbar, TextField } from "@mui/material";
 import * as yup from "yup";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { useState } from "react";
+import React, { useState } from "react";
 import AuthGoogleContainer from "./AuthGoogleContainer";
 
 
@@ -26,90 +26,75 @@ const RegisterContainer = (props: Props) => {
   })
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver: yupResolver(validationSchema) });
-  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
 
   function handleClose() {
     setOpen(false);
   }
 
-
   const registerUser = (data: FormValues) => {
-    setMessage("");
+    setErrorMessage("");
     createUserWithEmailAndPassword(auth, data.username, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
         sendEmailVerification(user)
           .then(() => {
-            setMessage("Email sent for verification");
+            setErrorMessage("Email sent for verification");
             setOpen(true);
           })
           .catch((error) => {
-            setMessage("Error sending email: " + error);
+            setErrorMessage("Error sending email: " + error);
             setOpen(true);
           })
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        setMessage(errorCode + ": " + errorMessage);
+        setErrorMessage(errorCode + ": " + errorMessage);
         setOpen(true);
       })
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-      <form onSubmit={handleSubmit(registerUser)}>
-        <Card >
-          <CardContent>
-            <div>
-              <TextField
-                error={errors.username ? true : false}
-                fullWidth
-                id="username"
-                label="Username"
-                placeholder="Username"
-                margin="normal"
-                helperText={errors.username?.message}
-                {...register("username", { required: true })}
-              />
-              <TextField
-                error={errors.password ? true : false}
-                fullWidth
-                id="password"
-                type="password"
-                label="Password"
-                placeholder="Password"
-                margin="normal"
-                helperText={errors.password?.message}
-                {...register("password")}
-              />
-              <TextField
-                error={errors.repeatPassword ? true : false}
-                fullWidth
-                id="repeatPassword"
-                type="password"
-                label="Repeat password"
-                placeholder="Repeat password"
-                margin="normal"
-                helperText={errors.repeatPassword?.message}
-                {...register("repeatPassword")}
-              />
-            </div>
-          </CardContent>
-          <CardActions>
-            <Grid container justifyContent="center">
-              <Grid item>
-                <Button variant="outlined" type="submit">
-                  {" "}
-                  Register
-                </Button>
-              </Grid>
-            </Grid>
-          </CardActions>
-        </Card>
-      </form>
-      <AuthGoogleContainer />
+    <React.Fragment>
+      <FormControl>
+        <Grid container gap={4}>
+          <TextField
+            fullWidth
+            id="username"
+            type="text"
+            placeholder="Username"
+            error={errors.username ? true : false}
+            helperText={errors.username?.message}
+            {...register("username")}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            type="password"
+            placeholder="Password"
+            error={errors.password ? true : false}
+            helperText={errors.password?.message}
+            {...register("password")}
+          />
+          <TextField
+            fullWidth
+            id="repeatPassword"
+            type="password"
+            placeholder="Repeat Password"
+            error={errors.repeatPassword ? true : false}
+            helperText={errors.repeatPassword?.message}
+            {...register("repeatPassword")}
+          />
+          <Grid item xs={12} textAlign='center'>
+            <Button variant="outlined" onClick={handleSubmit(registerUser)}>
+              Register
+            </Button>
+          </Grid>
+        </Grid>
+      </FormControl>
+
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -118,11 +103,11 @@ const RegisterContainer = (props: Props) => {
         open={open}
         autoHideDuration={4000}
         onClose={handleClose}>
-        <Alert onClose={handleClose} severity="info" sx={{ width: '100%' }}>
-          {message}
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          {errorMessage}
         </Alert>
       </Snackbar>
-    </Box>
+    </React.Fragment>
   );
 };
 

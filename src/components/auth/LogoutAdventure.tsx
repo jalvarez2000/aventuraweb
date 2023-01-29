@@ -27,7 +27,7 @@ const LogoutAdventure = ({ navigateTo = "/login" }: Props) => {
   return (
     <React.Fragment>
       <Button disabled={disabled} onClick={logout}>
-        Sign Out <Logout />
+        <Logout />
       </Button>
     </React.Fragment>
   );

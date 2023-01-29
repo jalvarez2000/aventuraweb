@@ -6,6 +6,7 @@ import routes from "./config/routes";
 import Center from "./components/utils/Center";
 import AuthChecker from "./components/auth/AuthChecker";
 
+
 function App() {
   const [loading, setLoading] = useState(true);
 

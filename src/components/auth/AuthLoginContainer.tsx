@@ -1,13 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
 import {
   Alert,
   Button,
-  Card,
-  CardActions,
-  CardContent,
+  FormControl,
   Grid,
   Snackbar,
   TextField,
@@ -29,12 +27,7 @@ const AuthLoginContainer = (props: Props) => {
     password: yup.string().required("Password is required").min(6, "Password must be at least 6 characters long")
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormValues>({ resolver: yupResolver(validationSchema) });
-
+  const { register, handleSubmit, formState: { errors } } = useForm<FormValues>({ resolver: yupResolver(validationSchema) });
   const [errorMessage, setErrorMessage] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -60,45 +53,34 @@ const AuthLoginContainer = (props: Props) => {
   }
 
   return (
-    <form autoComplete="off" onSubmit={handleSubmit(loginUser)}>
-      <Card>
-        <CardContent>
-          <div>
-            <TextField
-              fullWidth
-              id="username"
-              type="email"
-              label="Username"
-              placeholder="Username"
-              margin="normal"
-              error={errors.username ? true : false}
-              helperText={errors.username?.message}
-              {...register("username")}
-            />
-            <TextField
-              fullWidth
-              id="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-              margin="normal"
-              error={errors.password ? true : false}
-              helperText={errors.password?.message}
-              {...register("password")}
-            />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Grid container justifyContent="center">
-            <Grid item>
-              <Button variant="outlined" type="submit">
-                {" "}
-                Login
-              </Button>
-            </Grid>
+    <React.Fragment>
+      <FormControl>
+        <Grid container gap={4}>
+          <TextField
+            fullWidth
+            id="username"
+            type="email"
+            placeholder="Username"
+            error={errors.username ? true : false}
+            helperText={errors.username?.message}
+            {...register("username")}
+          />
+          <TextField
+            fullWidth
+            id="password"
+            type="password"
+            placeholder="Password"
+            error={errors.password ? true : false}
+            helperText={errors.password?.message}
+            {...register("password")}
+          />
+          <Grid item xs={12} textAlign='center'>
+            <Button variant="outlined" onClick={handleSubmit(loginUser)}>
+              Login
+            </Button>
           </Grid>
-        </CardActions>
-      </Card>
+        </Grid>
+      </FormControl>
       <Snackbar
         anchorOrigin={{
           vertical: "top",
@@ -111,7 +93,7 @@ const AuthLoginContainer = (props: Props) => {
           {errorMessage}
         </Alert>
       </Snackbar>
-    </form>
+    </React.Fragment>
   );
 };
 

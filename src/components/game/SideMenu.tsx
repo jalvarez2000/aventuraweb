@@ -1,8 +1,9 @@
-import { Box, Divider, Drawer, List, ListItemButton, ListItemText } from "@mui/material";
+import { Box, Button, Divider, Drawer, IconButton, List, ListItemButton, ListItemText } from "@mui/material";
 import React, { useState } from "react";
 import LogoutAdventure from "../auth/LogoutAdventure";
 import AddCircleTwoToneIcon from '@mui/icons-material/AddCircle';
 import { useGetGames } from "../../services/game";
+import { AddBox, AddCircle } from "@mui/icons-material";
 
 
 const SideMenu = () => {
@@ -39,7 +40,6 @@ const SideMenu = () => {
                     <ListItemButton style={{ display: 'flex', justifyContent: 'flex-end' }}>
                         <LogoutAdventure />
                     </ListItemButton>
-                    <Divider />
                     {games.docs.map((doc) => (
                         <ListItemButton key={doc.id}>
                             <ListItemText primary={doc.data().description} />
@@ -51,18 +51,18 @@ const SideMenu = () => {
     );
 
     return (
-        <div>
-            <React.Fragment>
-                <AddCircleTwoToneIcon fontSize="large" onClick={toggleDrawer(true)} />
-                <Drawer
-                    anchor='left'
-                    open={isOpened}
-                    onClose={toggleDrawer(false)}
-                >
-                    {list}
-                </Drawer>
-            </React.Fragment>
-        </div>
+        <React.Fragment>
+            <Button aria-label="delete" onClick={toggleDrawer(true)}>
+                <AddCircle />
+            </Button>
+            <Drawer
+                anchor='left'
+                open={isOpened}
+                onClose={toggleDrawer(false)}
+            >
+                {list}
+            </Drawer>
+        </React.Fragment>
     );
 };
 

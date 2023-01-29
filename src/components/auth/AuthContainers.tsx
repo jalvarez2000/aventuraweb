@@ -6,7 +6,7 @@ interface Props { }
 
 const AuthContainers = (props: Props) => {
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
             <AuthLoginContainer />
             <AuthGoogleContainer />
         </Box>

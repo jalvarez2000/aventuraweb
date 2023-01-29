@@ -2,9 +2,11 @@ import RoomArea from "../components/game/RoomArea";
 import SideMenu from "../components/game/SideMenu";
 import { useGetCurrentPlayerRoom } from "../services/player";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import React, { useEffect, useState } from "react";
+import React, { } from "react";
 import { auth } from "../config/firebase";
-import { useGetRoomInfo } from "../services/room";
+import { ThemeProvider } from "@emotion/react";
+import HomeTheme from "../components/theme/home";
+import { CssBaseline } from "@mui/material";
 
 
 const Home = () => {
@@ -14,8 +16,11 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      <SideMenu />
-      {roomId && <RoomArea roomId={roomId.data()?.roomId} />}
+      <ThemeProvider theme={HomeTheme}>
+        <CssBaseline />
+        <SideMenu />
+        {roomId && <RoomArea roomId={roomId.data()?.roomId} />}
+      </ThemeProvider>
     </React.Fragment>
   );
 }
