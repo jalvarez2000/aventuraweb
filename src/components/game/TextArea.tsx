@@ -9,9 +9,10 @@ const TextArea = (props: TextAreaProps) => {
     return (
         <TextField
             id="first-name"
-            label="Name"
+            label="¿Qué quieres hacer?"
             value={props.text}
             margin="normal"
+            autoFocus
         />
     )
 };

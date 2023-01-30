@@ -13,7 +13,13 @@ const RoomArea = (properties: RoomProperties) => {
     const [value, descriptionLoading, descriptionError] = useGetRoomInfo(properties.roomId);
 
     return (
-        <Grid container direction="column" justifyContent="center" alignItems="center">
+        <Grid container direction="column" gap={2} sx={{
+            marginTop: "1rem",
+            marginLeft: "10%",
+            marginRight: "10%",
+            marginBottom: "1rem",
+            width: "80%",
+        }}>
             <RoomImage imageUrl={value?.data()?.image} />
             <RoomDescription description={value?.data()?.description} />
             <TextArea text='' />

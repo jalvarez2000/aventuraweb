@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../config/firebase";
@@ -25,11 +25,11 @@ const LogoutAdventure = ({ navigateTo = "/login" }: Props) => {
   };
 
   return (
-    <React.Fragment>
+    <Grid item xs={12} textAlign='end'>
       <Button disabled={disabled} onClick={logout}>
         <Logout />
       </Button>
-    </React.Fragment>
+    </Grid>
   );
 };
 

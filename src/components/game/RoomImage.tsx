@@ -10,10 +10,9 @@ const RoomImage = (props: RoomImageProperties) => {
         <CardMedia
             component="img"
             sx={{
-                height: "auto",
-                width: "100%",
                 maxHeight: { xs: "50%", md: "50%" },
-                maxWidth: { xs: "40%", md: "40%" },
+                maxWidth: { xs: "50%", md: "50%" },
+                alignSelf: "center"
             }}
             src={props.imageUrl}
         />
