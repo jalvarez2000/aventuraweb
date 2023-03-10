@@ -1,12 +1,15 @@
 
 import { Grid } from '@mui/material';
-import { useGetRoomInfo } from '../../services/room';
+import { useGetRoomInfo } from '../../services/firebase/room';
+import CommandLogger from './CommandLogger';
 import RoomDescription from './RoomDescription';
 import RoomImage from './RoomImage';
 import TextArea from './TextArea';
 
 interface RoomProperties {
     roomId: string;
+    gameId: string;
+    playerId: string | undefined;
 }
 
 const RoomArea = (properties: RoomProperties) => {
@@ -22,7 +25,8 @@ const RoomArea = (properties: RoomProperties) => {
         }}>
             <RoomImage imageUrl={value?.data()?.image} />
             <RoomDescription description={value?.data()?.description} />
-            <TextArea text='' />
+            <TextArea />
+            <CommandLogger gameId={properties.gameId} playerId={properties.playerId} />
         </Grid>
     );
 };

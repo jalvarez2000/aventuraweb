@@ -1,8 +1,8 @@
 import { useDocument } from "react-firebase-hooks/firestore";
-import { db } from "../config/firebase";
 import { doc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
-const useGetCurrentPlayerRoom = (gameId: string, playerId: string | undefined) => {
+const useGetGamePlayerInfo = (gameId: string, playerId: string | undefined) => {
     return useDocument(
         doc(db, `games/${gameId}/players/${playerId}`),
         {
@@ -12,5 +12,5 @@ const useGetCurrentPlayerRoom = (gameId: string, playerId: string | undefined) =
 };
 
 export {
-    useGetCurrentPlayerRoom
+    useGetGamePlayerInfo as useGetGamePlayerInfo
 }

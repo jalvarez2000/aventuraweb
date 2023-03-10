@@ -1,5 +1,5 @@
 import { useCollection, useDocument } from "react-firebase-hooks/firestore";
-import { db } from "../config/firebase";
+import { db } from "../../config/firebase";
 import { doc, collection } from "firebase/firestore";
 
 const useGetGames = () => {

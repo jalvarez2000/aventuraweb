@@ -1,6 +1,6 @@
 import { useDocument } from "react-firebase-hooks/firestore";
-import { db } from "../config/firebase";
 import { doc } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 
 const useGetRoomInfo = (roomId: string) => {

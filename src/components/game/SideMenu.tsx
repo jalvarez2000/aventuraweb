@@ -1,6 +1,6 @@
 import { Button, Drawer } from "@mui/material";
 import React, { useState } from "react";
-import { useGetGames } from "../../services/game";
+import { useGetGames } from "../../services/firebase/game";
 import { AddCircle } from "@mui/icons-material";
 import SideMenuList from "./SideMenuList";
 
